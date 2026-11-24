@@ -1,4 +1,4 @@
-# Blockchan: Blockchain Transaction Manager and Security Labs
+# Blockchain Transaction Manager and Security Labs
 
 A university project that implements a proof-of-work blockchain in Node.js, with a menu-driven CLI for managing wallets, miners, transactions and peer-to-peer nodes. The repository also contains the related cryptography lab exercises and a small Flask web application protected by a custom Web Application Firewall (WAF).
 
@@ -35,8 +35,8 @@ Node.js, `crypto` (SHA-256), `elliptic` (secp256k1), `crypto-js`, `qrcode`, Node
 ### Installation
 
 ```bash
-git clone https://github.com/AbdoMoamer/Blockchan.git
-cd "Blockchan/A CLI-Based Blockchain Transaction Manager"
+git clone https://github.com/AbdoMoamer/Blockchain.git
+cd "Blockchain/A CLI-Based Blockchain Transaction Manager"
 npm install
 ```
 
@@ -74,6 +74,10 @@ The main menu offers:
 ```bash
 cd Waf
 pip install -r requirements.txt
+
+# Set your own secrets (random values are generated if these are not set)
+export WAF_SECRET_KEY="change-me"
+export WAF_ADMIN_PASS="choose-a-password"
 python app.py
 ```
 
@@ -85,7 +89,7 @@ The `Lab1`, `lab2` and `Lab3` folders hold the course exercises in Node.js. `lab
 
 ## Disclaimer
 
-This is an educational project. The key files in the repository are demo data for local testing only and must not be used for real funds.
+This is an educational project. Wallet key files, user data and logs are not committed (see `.gitignore`). Wallets are created locally from the CLI. Do not use this code to handle real funds.
 
 ## Author
 
