@@ -1,0 +1,12 @@
+node_modules/
+keys/
+logs.txt
+*.log
+__pycache__/
+*.pyc
+.env
+users.json
+clients.json
+miners.json
+userPorts.json
+.DS_Store
