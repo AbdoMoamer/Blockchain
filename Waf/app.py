@@ -7,12 +7,13 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 import bleach
 import os
+import secrets
 from waf_rules import is_malicious, is_lfi, is_rfi, is_cmd_injection, is_path_traversal
 from attack_logger import log_attack
 import time
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('WAF_SECRET_KEY', 'supersecretkey')
+app.config['SECRET_KEY'] = os.environ.get('WAF_SECRET_KEY') or secrets.token_hex(32)
 
 # Rate Limiting
 limiter = Limiter(get_remote_address, app=app, default_limits=["10 per minute"])
@@ -22,7 +23,7 @@ csrf = CSRFProtect(app)
 
 # Settings (in-memory for demo)
 SETTINGS = {
-    'admin_password': os.environ.get('WAF_ADMIN_PASS', 'admin123'),
+    'admin_password': os.environ.get('WAF_ADMIN_PASS') or secrets.token_urlsafe(12),
     'rate_limit': 10,  # requests per minute
     'block_duration': 10,  # minutes
     'enabled_protections': {
@@ -622,4 +623,4 @@ TEMPLATE = '''
 
 if __name__ == "__main__":
     BLOCKED_IPS.clear()
-    app.run(debug=True) 
+    app.run(debug=os.environ.get('WAF_DEBUG') == '1') 
